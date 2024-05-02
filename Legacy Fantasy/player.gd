@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
 const RUN_SPEED := 160.0
-const ACCELERATION := RUN_SPEED / 0.2 # 0~RunSpeed needs 0.2s
+const FLOOR_ACCELERATION := RUN_SPEED / 0.2 # 0~RunSpeed needs 0.2s
+const AIR_ACCELERATION := RUN_SPEED / 0.02 # 0~RunSpeed needs 0.2s
 const JUMP_VELOCITY := -320.0 # In 2D - Y direction, jump up means -XXX
 
 
@@ -14,8 +15,8 @@ func _physics_process(delta: float) -> void:
 	# left -> -1 , right -> 1
 	# left + right -> 0
 	var direction := Input.get_axis("move_left", "move_right")
-	
-	velocity.x = move_toward(velocity.x, direction * RUN_SPEED, ACCELERATION * delta)
+	var acceleration := FLOOR_ACCELERATION if is_on_floor() else AIR_ACCELERATION
+	velocity.x = move_toward(velocity.x, direction * RUN_SPEED, acceleration * delta)
 	velocity.y += gravity * delta
 
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
