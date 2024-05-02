@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0l1eqtl8xgem"]
+[gd_scene load_steps=8 format=3 uid="uid://d0l1eqtl8xgem"]
 
 [ext_resource type="Texture2D" uid="uid://dd8w62nnwolpl" path="res://assets/legacy_fantasy/Trees/Tree-Assets.png" id="1_fjhfa"]
 [ext_resource type="Script" path="res://world.gd" id="1_pp5aa"]
 [ext_resource type="PackedScene" uid="uid://b1ykf1oiothxt" path="res://player.tscn" id="2_6bfy0"]
 [ext_resource type="Texture2D" uid="uid://bjjxx1ie5nyt2" path="res://assets/legacy_fantasy/Background/Background.png" id="4_p8fgu"]
+[ext_resource type="Texture2D" uid="uid://c1rdcrhcdn2q5" path="res://assets/legacy_fantasy/Trees/Background.png" id="5_kvlgl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_65hkn"]
 texture = ExtResource("1_fjhfa")
@@ -513,3 +514,35 @@ motion_mirroring = Vector2(480, 0)
 position = Vector2(2, -17)
 texture = ExtResource("4_p8fgu")
 centered = false
+
+[node name="Hills" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.2)
+motion_mirroring = Vector2(384, 0)
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/Hills"]
+position = Vector2(1, 58)
+texture = ExtResource("5_kvlgl")
+centered = false
+region_enabled = true
+region_rect = Rect2(800, 0, 96, 256)
+
+[node name="Background2" type="Sprite2D" parent="ParallaxBackground/Hills"]
+position = Vector2(97, 58)
+texture = ExtResource("5_kvlgl")
+centered = false
+region_enabled = true
+region_rect = Rect2(800, 0, 96, 256)
+
+[node name="Background3" type="Sprite2D" parent="ParallaxBackground/Hills"]
+position = Vector2(193, 58)
+texture = ExtResource("5_kvlgl")
+centered = false
+region_enabled = true
+region_rect = Rect2(800, 0, 96, 256)
+
+[node name="Background4" type="Sprite2D" parent="ParallaxBackground/Hills"]
+position = Vector2(289, 58)
+texture = ExtResource("5_kvlgl")
+centered = false
+region_enabled = true
+region_rect = Rect2(800, 0, 96, 256)
