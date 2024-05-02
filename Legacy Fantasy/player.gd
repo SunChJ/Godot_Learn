@@ -111,6 +111,8 @@ func get_next_state(state: State) -> State:
 				return State.WALL_SLIDING
 		
 		State.LANDING:
+			if not is_still:
+				return State.RUNNING
 			if not animation_player.is_playing():
 				return State.IDLE 
 		
