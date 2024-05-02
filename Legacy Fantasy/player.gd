@@ -14,7 +14,8 @@ const FLOOR_ACCELERATION := RUN_SPEED / 0.2 # 0~RunSpeed needs 0.2s
 const AIR_ACCELERATION := RUN_SPEED / 0.02 # 0~RunSpeed needs 0.2s
 const JUMP_VELOCITY := -320.0 # In 2D - Y direction, jump up means -XXX
 
-var gravity := ProjectSettings.get("physics/2d/default_gravity") as float
+var default_gravity := ProjectSettings.get("physics/2d/default_gravity") as float
+var is_first_tick := false
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -33,18 +34,20 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func tick_physics(state: State, delta: float) -> void:
 	match state:
 		State.IDLE:
-			move(delta)
+			move(default_gravity, delta)
 		
 		State.RUNNING:
-			move(delta)
+			move(default_gravity, delta)
 			
 		State.JUMP:
-			move(delta)
+			move(0.0 if is_first_tick else default_gravity, delta)
 			
 		State.FALL:
-			move(delta)
+			move(default_gravity, delta)
+			
+	is_first_tick = false
 	
-func move(delta: float)	-> void:
+func move(gravity: float, delta: float)	-> void:
 	var direction := Input.get_axis("move_left", "move_right")
 	var acceleration := FLOOR_ACCELERATION if is_on_floor() else AIR_ACCELERATION
 	velocity.x = move_toward(velocity.x, direction * RUN_SPEED, acceleration * delta)
@@ -112,3 +115,5 @@ func transition_state(from: State, to: State) -> void:
 			animation_player.play("fall")
 			if from in GROUND_STATE:
 				coyote_timer.start()
+				
+	is_first_tick = true
