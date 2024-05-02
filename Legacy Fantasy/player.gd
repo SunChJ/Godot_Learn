@@ -6,6 +6,7 @@ enum State {
 	JUMP,
 	FALL,
 	LANDING,
+	WALL_SLIDING,
 }
 
 const GROUND_STATE := [State.IDLE, State.RUNNING, State.LANDING]
@@ -48,6 +49,9 @@ func tick_physics(state: State, delta: float) -> void:
 			
 		State.LANDING:
 			stand(delta)
+			
+		State.WALL_SLIDING:
+			move(default_gravity / 3, delta)
 			
 	is_first_tick = false
 	
@@ -100,11 +104,18 @@ func get_next_state(state: State) -> State:
 		State.FALL:
 			if is_on_floor():
 				return State.LANDING if is_still else State.RUNNING
+			if is_on_wall():
+				return State.WALL_SLIDING
 		
 		State.LANDING:
 			if not animation_player.is_playing():
 				return State.IDLE 
-				
+		
+		State.WALL_SLIDING:
+			if is_on_floor():
+				return State.IDLE
+			if not is_on_wall():
+				return State.FALL
 	return state
 	
 func transition_state(from: State, to: State) -> void:
@@ -132,5 +143,8 @@ func transition_state(from: State, to: State) -> void:
 		
 		State.LANDING:
 			animation_player.play("landing")
+		
+		State.WALL_SLIDING:
+			animation_player.play("wall_sliding")
 				
 	is_first_tick = true
