@@ -10,7 +10,12 @@ var gravity := ProjectSettings.get("physics/2d/default_gravity") as float
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var coyote_timer = $CoyoteTimer
+@onready var coyote_timer: Timer = $CoyoteTimer
+@onready var jump_request_timer: Timer = $JumpRequestTimer
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.is_action_pressed("jump"):
+		jump_request_timer.start()
 
 func _physics_process(delta: float) -> void:
 	# left -> -1 , right -> 1
@@ -20,12 +25,13 @@ func _physics_process(delta: float) -> void:
 	velocity.x = move_toward(velocity.x, direction * RUN_SPEED, acceleration * delta)
 	velocity.y += gravity * delta
 
-	var can_jump:bool = is_on_floor() or coyote_timer.time_left > 0
-	var shouldJump := can_jump and Input.is_action_just_pressed("jump")
+	var can_jump := is_on_floor() or coyote_timer.time_left > 0
+	var shouldJump := can_jump and jump_request_timer.time_left > 0
 	
 	if shouldJump:
 		velocity.y = JUMP_VELOCITY
 		coyote_timer.stop()
+		jump_request_timer.stop()
 		
 	if is_on_floor():
 		if is_zero_approx(direction) and is_zero_approx(velocity.x):
