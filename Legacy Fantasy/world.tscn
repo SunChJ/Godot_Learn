@@ -507,7 +507,7 @@ editor_draw_drag_margin = true
 
 [node name="sky" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.3, 0.1)
-motion_mirroring = Vector2(540, 0)
+motion_mirroring = Vector2(480, 0)
 
 [node name="Background" type="Sprite2D" parent="ParallaxBackground/sky"]
 position = Vector2(2, -17)
