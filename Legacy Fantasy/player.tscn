@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1ykf1oiothxt"]
+[gd_scene load_steps=12 format=3 uid="uid://b1ykf1oiothxt"]
 
 [ext_resource type="Texture2D" uid="uid://bytapbcw612qh" path="res://assets/generic_char/char_blue_1.png" id="1_7l1pt"]
 [ext_resource type="Script" path="res://player.gd" id="1_gkxmr"]
+[ext_resource type="Script" path="res://classes/StateMachine.gd" id="3_lkv0c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pg4a1"]
 size = Vector2(12, 27)
@@ -286,3 +287,6 @@ one_shot = true
 [node name="JumpRequestTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_lkv0c")
