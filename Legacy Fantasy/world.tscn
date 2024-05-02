@@ -520,29 +520,61 @@ motion_scale = Vector2(0.5, 0.2)
 motion_mirroring = Vector2(384, 0)
 
 [node name="Background" type="Sprite2D" parent="ParallaxBackground/Hills"]
-position = Vector2(1, 58)
+position = Vector2(1, 25)
 texture = ExtResource("5_kvlgl")
 centered = false
 region_enabled = true
 region_rect = Rect2(800, 0, 96, 256)
 
 [node name="Background2" type="Sprite2D" parent="ParallaxBackground/Hills"]
-position = Vector2(97, 58)
+position = Vector2(97, 25)
 texture = ExtResource("5_kvlgl")
 centered = false
 region_enabled = true
 region_rect = Rect2(800, 0, 96, 256)
 
 [node name="Background3" type="Sprite2D" parent="ParallaxBackground/Hills"]
-position = Vector2(193, 58)
+position = Vector2(193, 25)
 texture = ExtResource("5_kvlgl")
 centered = false
 region_enabled = true
 region_rect = Rect2(800, 0, 96, 256)
 
 [node name="Background4" type="Sprite2D" parent="ParallaxBackground/Hills"]
-position = Vector2(289, 58)
+position = Vector2(289, 25)
 texture = ExtResource("5_kvlgl")
 centered = false
 region_enabled = true
 region_rect = Rect2(800, 0, 96, 256)
+
+[node name="Trees" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.6, 0.3)
+motion_mirroring = Vector2(384, 0)
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/Trees"]
+position = Vector2(0, 73)
+texture = ExtResource("5_kvlgl")
+centered = false
+region_enabled = true
+region_rect = Rect2(112, 0, 96, 256)
+
+[node name="Background2" type="Sprite2D" parent="ParallaxBackground/Trees"]
+position = Vector2(96, 73)
+texture = ExtResource("5_kvlgl")
+centered = false
+region_enabled = true
+region_rect = Rect2(112, 0, 96, 256)
+
+[node name="Background3" type="Sprite2D" parent="ParallaxBackground/Trees"]
+position = Vector2(192, 73)
+texture = ExtResource("5_kvlgl")
+centered = false
+region_enabled = true
+region_rect = Rect2(112, 0, 96, 256)
+
+[node name="Background4" type="Sprite2D" parent="ParallaxBackground/Trees"]
+position = Vector2(288, 73)
+texture = ExtResource("5_kvlgl")
+centered = false
+region_enabled = true
+region_rect = Rect2(112, 0, 96, 256)
