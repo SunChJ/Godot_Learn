@@ -52,6 +52,7 @@ func tick_physics(state: State, delta: float) -> void:
 			
 		State.WALL_SLIDING:
 			move(default_gravity / 3, delta)
+			graphics.scale.x = get_wall_normal().x
 			
 	is_first_tick = false
 	
