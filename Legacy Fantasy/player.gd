@@ -16,8 +16,10 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
 		jump_request_timer.start()
 	
-	if event.is_action_released("jump") and velocity.y < JUMP_VELOCITY / 2:
-		velocity.y = JUMP_VELOCITY / 2	
+	if event.is_action_released("jump"):
+		jump_request_timer.stop()
+		if velocity.y < JUMP_VELOCITY / 2:
+			velocity.y = JUMP_VELOCITY / 2	
 
 func _physics_process(delta: float) -> void:
 	# left -> -1 , right -> 1
