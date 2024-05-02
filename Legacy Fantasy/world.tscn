@@ -26,3 +26,8 @@ layer_0/tile_data = PackedInt32Array(655372, 65536, 1, 655373, 65536, 1, 524305,
 
 [node name="Player" parent="." instance=ExtResource("2_6bfy0")]
 position = Vector2(70, 58)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -14)
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
