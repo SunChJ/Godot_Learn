@@ -1,2 +1,2 @@
-# Gotdot_Learn
-Learn Gotdot
+# Godot_Learn
+Learn Godot
