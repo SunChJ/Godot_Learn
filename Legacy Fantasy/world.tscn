@@ -504,153 +504,266 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 editor_draw_drag_margin = true
 
-[node name="Background" type="ParallaxBackground" parent="."]
+[node name="Decorations" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
-[node name="sky" type="ParallaxLayer" parent="Background"]
+[node name="Background" type="ParallaxBackground" parent="Decorations"]
+
+[node name="sky" type="ParallaxLayer" parent="Decorations/Background"]
 motion_scale = Vector2(0.3, 0.1)
 motion_mirroring = Vector2(480, 0)
 
-[node name="Background" type="Sprite2D" parent="Background/sky"]
+[node name="Background" type="Sprite2D" parent="Decorations/Background/sky"]
 position = Vector2(2, -17)
 texture = ExtResource("4_p8fgu")
 centered = false
 
-[node name="Hills" type="ParallaxLayer" parent="Background"]
+[node name="Hills" type="ParallaxLayer" parent="Decorations/Background"]
 motion_scale = Vector2(0.5, 0.2)
 motion_mirroring = Vector2(384, 0)
 
-[node name="Background" type="Sprite2D" parent="Background/Hills"]
+[node name="Background" type="Sprite2D" parent="Decorations/Background/Hills"]
 position = Vector2(1, 25)
 texture = ExtResource("5_kvlgl")
 centered = false
 region_enabled = true
 region_rect = Rect2(800, 0, 96, 256)
 
-[node name="Background2" type="Sprite2D" parent="Background/Hills"]
+[node name="Background2" type="Sprite2D" parent="Decorations/Background/Hills"]
 position = Vector2(97, 25)
 texture = ExtResource("5_kvlgl")
 centered = false
 region_enabled = true
 region_rect = Rect2(800, 0, 96, 256)
 
-[node name="Background3" type="Sprite2D" parent="Background/Hills"]
+[node name="Background3" type="Sprite2D" parent="Decorations/Background/Hills"]
 position = Vector2(193, 25)
 texture = ExtResource("5_kvlgl")
 centered = false
 region_enabled = true
 region_rect = Rect2(800, 0, 96, 256)
 
-[node name="Background4" type="Sprite2D" parent="Background/Hills"]
+[node name="Background4" type="Sprite2D" parent="Decorations/Background/Hills"]
 position = Vector2(289, 25)
 texture = ExtResource("5_kvlgl")
 centered = false
 region_enabled = true
 region_rect = Rect2(800, 0, 96, 256)
 
-[node name="Trees" type="ParallaxLayer" parent="Background"]
+[node name="Trees" type="ParallaxLayer" parent="Decorations/Background"]
 motion_scale = Vector2(0.6, 0.3)
 motion_mirroring = Vector2(384, 0)
 
-[node name="Background" type="Sprite2D" parent="Background/Trees"]
+[node name="Background" type="Sprite2D" parent="Decorations/Background/Trees"]
 position = Vector2(0, 73)
 texture = ExtResource("5_kvlgl")
 centered = false
 region_enabled = true
 region_rect = Rect2(112, 0, 96, 256)
 
-[node name="Background2" type="Sprite2D" parent="Background/Trees"]
+[node name="Background2" type="Sprite2D" parent="Decorations/Background/Trees"]
 position = Vector2(96, 73)
 texture = ExtResource("5_kvlgl")
 centered = false
 region_enabled = true
 region_rect = Rect2(112, 0, 96, 256)
 
-[node name="Background3" type="Sprite2D" parent="Background/Trees"]
+[node name="Background3" type="Sprite2D" parent="Decorations/Background/Trees"]
 position = Vector2(192, 73)
 texture = ExtResource("5_kvlgl")
 centered = false
 region_enabled = true
 region_rect = Rect2(112, 0, 96, 256)
 
-[node name="Background4" type="Sprite2D" parent="Background/Trees"]
+[node name="Background4" type="Sprite2D" parent="Decorations/Background/Trees"]
 position = Vector2(288, 73)
 texture = ExtResource("5_kvlgl")
 centered = false
 region_enabled = true
 region_rect = Rect2(112, 0, 96, 256)
 
-[node name="Bushes" type="ParallaxLayer" parent="Background"]
+[node name="Bushes" type="ParallaxLayer" parent="Decorations/Background"]
 motion_scale = Vector2(0.9, 0.9)
 
-[node name="Tree-assets" type="Sprite2D" parent="Background/Bushes"]
+[node name="Tree-assets" type="Sprite2D" parent="Decorations/Background/Bushes"]
 position = Vector2(157, 183)
 texture = ExtResource("1_fjhfa")
 region_enabled = true
 region_rect = Rect2(210, 5, 124, 86)
 
-[node name="Tree-assets3" type="Sprite2D" parent="Background/Bushes"]
+[node name="Tree-assets3" type="Sprite2D" parent="Decorations/Background/Bushes"]
 position = Vector2(475, 213)
 texture = ExtResource("1_fjhfa")
 region_enabled = true
 region_rect = Rect2(210, 5, 124, 86)
 
-[node name="Tree-assets10" type="Sprite2D" parent="Background/Bushes"]
+[node name="Tree-assets10" type="Sprite2D" parent="Decorations/Background/Bushes"]
 position = Vector2(105, -84)
 texture = ExtResource("1_fjhfa")
 region_enabled = true
 region_rect = Rect2(210, 5, 124, 86)
 
-[node name="Tree-assets4" type="Sprite2D" parent="Background/Bushes"]
+[node name="Tree-assets4" type="Sprite2D" parent="Decorations/Background/Bushes"]
 position = Vector2(559, 183)
 texture = ExtResource("1_fjhfa")
 region_enabled = true
 region_rect = Rect2(210, 5, 124, 86)
 
-[node name="Tree-assets5" type="Sprite2D" parent="Background/Bushes"]
+[node name="Tree-assets5" type="Sprite2D" parent="Decorations/Background/Bushes"]
 position = Vector2(849, 164)
 texture = ExtResource("1_fjhfa")
 region_enabled = true
 region_rect = Rect2(210, 5, 124, 86)
 
-[node name="Tree-assets2" type="Sprite2D" parent="Background/Bushes"]
+[node name="Tree-assets2" type="Sprite2D" parent="Decorations/Background/Bushes"]
 position = Vector2(391, 61)
 texture = ExtResource("1_fjhfa")
 region_enabled = true
 region_rect = Rect2(210, 101, 124, 86)
 
-[node name="Tree-assets6" type="Sprite2D" parent="Background/Bushes"]
+[node name="Tree-assets6" type="Sprite2D" parent="Decorations/Background/Bushes"]
 position = Vector2(665, 38)
 texture = ExtResource("1_fjhfa")
 region_enabled = true
 region_rect = Rect2(210, 101, 124, 86)
 
-[node name="Tree-assets7" type="Sprite2D" parent="Background/Bushes"]
+[node name="Tree-assets7" type="Sprite2D" parent="Decorations/Background/Bushes"]
 position = Vector2(640, -66)
 texture = ExtResource("1_fjhfa")
 region_enabled = true
 region_rect = Rect2(210, 101, 124, 86)
 
-[node name="Tree-assets8" type="Sprite2D" parent="Background/Bushes"]
+[node name="Tree-assets8" type="Sprite2D" parent="Decorations/Background/Bushes"]
 position = Vector2(551, -170)
 texture = ExtResource("1_fjhfa")
 region_enabled = true
 region_rect = Rect2(210, 101, 124, 86)
 
-[node name="Tree-assets9" type="Sprite2D" parent="Background/Bushes"]
+[node name="Tree-assets9" type="Sprite2D" parent="Decorations/Background/Bushes"]
 position = Vector2(151, -174)
 texture = ExtResource("1_fjhfa")
 region_enabled = true
 region_rect = Rect2(210, 101, 124, 86)
 
-[node name="Foreground" type="ParallaxBackground" parent="."]
+[node name="Foreground" type="ParallaxBackground" parent="Decorations"]
 layer = 1
 
-[node name="Bushes" type="ParallaxLayer" parent="Foreground"]
+[node name="Bushes" type="ParallaxLayer" parent="Decorations/Foreground"]
 motion_scale = Vector2(1.1, 1.1)
 
-[node name="Tree-assets" type="Sprite2D" parent="Foreground/Bushes"]
-position = Vector2(6, 172)
+[node name="Tree-assets" type="Sprite2D" parent="Decorations/Foreground/Bushes"]
+position = Vector2(4, 195)
 texture = ExtResource("1_fjhfa")
 centered = false
 region_enabled = true
 region_rect = Rect2(210, 293, 124, 86)
+
+[node name="Tree-assets2" type="Sprite2D" parent="Decorations/Foreground/Bushes"]
+position = Vector2(80, 206)
+texture = ExtResource("1_fjhfa")
+centered = false
+region_enabled = true
+region_rect = Rect2(210, 197, 124, 86)
+
+[node name="Tree-assets8" type="Sprite2D" parent="Decorations/Foreground/Bushes"]
+position = Vector2(728, 196)
+texture = ExtResource("1_fjhfa")
+centered = false
+region_enabled = true
+region_rect = Rect2(210, 197, 124, 86)
+
+[node name="Tree-assets9" type="Sprite2D" parent="Decorations/Foreground/Bushes"]
+position = Vector2(1012, -9)
+texture = ExtResource("1_fjhfa")
+centered = false
+region_enabled = true
+region_rect = Rect2(210, 197, 124, 86)
+
+[node name="Tree-assets10" type="Sprite2D" parent="Decorations/Foreground/Bushes"]
+position = Vector2(647, -212)
+texture = ExtResource("1_fjhfa")
+centered = false
+region_enabled = true
+region_rect = Rect2(210, 197, 124, 86)
+
+[node name="Tree-assets11" type="Sprite2D" parent="Decorations/Foreground/Bushes"]
+position = Vector2(598, -237)
+texture = ExtResource("1_fjhfa")
+centered = false
+region_enabled = true
+region_rect = Rect2(210, 197, 124, 86)
+
+[node name="Tree-assets13" type="Sprite2D" parent="Decorations/Foreground/Bushes"]
+position = Vector2(-35, -137)
+texture = ExtResource("1_fjhfa")
+centered = false
+region_enabled = true
+region_rect = Rect2(210, 197, 124, 86)
+
+[node name="Tree-assets15" type="Sprite2D" parent="Decorations/Foreground/Bushes"]
+position = Vector2(89, -109)
+rotation = 0.261799
+texture = ExtResource("1_fjhfa")
+centered = false
+region_enabled = true
+region_rect = Rect2(210, 197, 124, 86)
+
+[node name="Tree-assets16" type="Sprite2D" parent="Decorations/Foreground/Bushes"]
+position = Vector2(0.999996, -96)
+rotation = 0.523598
+texture = ExtResource("1_fjhfa")
+centered = false
+region_enabled = true
+region_rect = Rect2(210, 197, 124, 86)
+
+[node name="Tree-assets14" type="Sprite2D" parent="Decorations/Foreground/Bushes"]
+position = Vector2(256, -261)
+texture = ExtResource("1_fjhfa")
+centered = false
+region_enabled = true
+region_rect = Rect2(210, 197, 124, 86)
+
+[node name="Tree-assets12" type="Sprite2D" parent="Decorations/Foreground/Bushes"]
+position = Vector2(535, -268)
+texture = ExtResource("1_fjhfa")
+centered = false
+region_enabled = true
+region_rect = Rect2(210, 197, 124, 86)
+
+[node name="Tree-assets5" type="Sprite2D" parent="Decorations/Foreground/Bushes"]
+position = Vector2(458, 203.688)
+texture = ExtResource("1_fjhfa")
+centered = false
+region_enabled = true
+region_rect = Rect2(210, 197, 124, 86)
+
+[node name="Tree-assets6" type="Sprite2D" parent="Decorations/Foreground/Bushes"]
+position = Vector2(553, 196)
+texture = ExtResource("1_fjhfa")
+centered = false
+region_enabled = true
+region_rect = Rect2(210, 197, 124, 86)
+
+[node name="Tree-assets7" type="Sprite2D" parent="Decorations/Foreground/Bushes"]
+position = Vector2(657, 159)
+rotation = -0.177229
+scale = Vector2(0.669695, 1.34884)
+texture = ExtResource("1_fjhfa")
+centered = false
+region_enabled = true
+region_rect = Rect2(210, 197, 124, 86)
+
+[node name="Tree-assets3" type="Sprite2D" parent="Decorations/Foreground/Bushes"]
+position = Vector2(-15, 22)
+texture = ExtResource("1_fjhfa")
+centered = false
+region_enabled = true
+region_rect = Rect2(210, 293, 124, 86)
+
+[node name="Tree-assets4" type="Sprite2D" parent="Decorations/Foreground/Bushes"]
+position = Vector2(66, 2)
+texture = ExtResource("1_fjhfa")
+centered = false
+region_enabled = true
+region_rect = Rect2(210, 197, 124, 86)
