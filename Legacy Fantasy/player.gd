@@ -47,7 +47,7 @@ func tick_physics(state: State, delta: float) -> void:
 			move(default_gravity, delta)
 			
 		State.LANDING:
-			move(default_gravity, delta)
+			stand(delta)
 			
 	is_first_tick = false
 	
@@ -62,6 +62,12 @@ func move(gravity: float, delta: float)	-> void:
 	
 	move_and_slide()
 	
+func stand(delta: float) -> void:
+	var acceleration := FLOOR_ACCELERATION if is_on_floor() else AIR_ACCELERATION
+	velocity.x = move_toward(velocity.x, 0.0, acceleration * delta)
+	velocity.y += default_gravity * delta
+	
+	move_and_slide()
 			
 func get_next_state(state: State) -> State:
 	var can_jump := is_on_floor() or coyote_timer.time_left > 0
@@ -93,7 +99,7 @@ func get_next_state(state: State) -> State:
 			
 		State.FALL:
 			if is_on_floor():
-				return State.LANDING
+				return State.LANDING if is_still else State.RUNNING
 		
 		State.LANDING:
 			if not animation_player.is_playing():
