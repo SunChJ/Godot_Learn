@@ -5,7 +5,6 @@ const FLOOR_ACCELERATION := RUN_SPEED / 0.2 # 0~RunSpeed needs 0.2s
 const AIR_ACCELERATION := RUN_SPEED / 0.02 # 0~RunSpeed needs 0.2s
 const JUMP_VELOCITY := -320.0 # In 2D - Y direction, jump up means -XXX
 
-
 var gravity := ProjectSettings.get("physics/2d/default_gravity") as float
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -16,6 +15,9 @@ var gravity := ProjectSettings.get("physics/2d/default_gravity") as float
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
 		jump_request_timer.start()
+	
+	if event.is_action_released("jump") and velocity.y < JUMP_VELOCITY / 2:
+		velocity.y = JUMP_VELOCITY / 2	
 
 func _physics_process(delta: float) -> void:
 	# left -> -1 , right -> 1
