@@ -6,8 +6,8 @@ const JUMP_VELOCITY := -300.0 # In 2D - Y direction, jump up means -XXX
 
 var gravity := ProjectSettings.get("physics/2d/default_gravity") as float
 
-@onready var sprite_2d = $Sprite2D
-@onready var animation_player = $AnimationPlayer
+@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _physics_process(delta: float) -> void:
 	# left -> -1 , right -> 1
