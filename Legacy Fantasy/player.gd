@@ -10,6 +10,7 @@ var gravity := ProjectSettings.get("physics/2d/default_gravity") as float
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var coyote_timer = $CoyoteTimer
 
 func _physics_process(delta: float) -> void:
 	# left -> -1 , right -> 1
@@ -19,8 +20,12 @@ func _physics_process(delta: float) -> void:
 	velocity.x = move_toward(velocity.x, direction * RUN_SPEED, acceleration * delta)
 	velocity.y += gravity * delta
 
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
+	var can_jump:bool = is_on_floor() or coyote_timer.time_left > 0
+	var shouldJump := can_jump and Input.is_action_just_pressed("jump")
+	
+	if shouldJump:
 		velocity.y = JUMP_VELOCITY
+		coyote_timer.stop()
 		
 	if is_on_floor():
 		if is_zero_approx(direction) and is_zero_approx(velocity.x):
@@ -33,4 +38,11 @@ func _physics_process(delta: float) -> void:
 	if not is_zero_approx(direction):
 		sprite_2d.flip_h = direction < 0
 	
+	var was_on_floor := is_on_floor()
 	move_and_slide()
+	
+	if is_on_floor() != was_on_floor:
+		if was_on_floor and not shouldJump:
+			coyote_timer.start()
+		else:
+			coyote_timer.stop()
