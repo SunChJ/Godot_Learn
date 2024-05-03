@@ -145,7 +145,7 @@ func get_next_state(state: State) -> State:
 	return state
 	
 func transition_state(from: State, to: State) -> void:
-	print("[%s] %s => %s" %[
+	print("Player [%s] %s => %s" %[
 		Engine.get_physics_frames(),
 		State.keys()[from] if from != -1 else "<START>",
 		State.keys()[to],

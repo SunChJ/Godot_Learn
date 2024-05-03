@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://cmhqmaeqnoeyk"]
+[gd_scene load_steps=14 format=3 uid="uid://cmhqmaeqnoeyk"]
 
 [ext_resource type="PackedScene" uid="uid://c1du1yy8emww5" path="res://enemies/enemy.tscn" id="1_dp2mk"]
+[ext_resource type="Script" path="res://enemies/boar.gd" id="2_7lmat"]
 [ext_resource type="Texture2D" uid="uid://d1svalif0idsp" path="res://assets/legacy_fantasy/Boar/Idle-Sheet.png" id="2_8liio"]
 [ext_resource type="Texture2D" uid="uid://comc4xildbxfq" path="res://assets/legacy_fantasy/Boar/Hit-Sheet.png" id="3_aatqw"]
 [ext_resource type="Texture2D" uid="uid://bdodnui6a2plp" path="res://assets/legacy_fantasy/Boar/Walk-Base-Sheet.png" id="4_86yer"]
@@ -222,6 +223,7 @@ _data = {
 }
 
 [node name="Boar" instance=ExtResource("1_dp2mk")]
+script = ExtResource("2_7lmat")
 
 [node name="Sprite2D" parent="Graphics" index="0"]
 position = Vector2(0, -16)
@@ -249,3 +251,7 @@ shape = SubResource("CircleShape2D_wsg8r")
 libraries = {
 "": SubResource("AnimationLibrary_th61s")
 }
+
+[node name="CalmDownTimer" type="Timer" parent="." index="4"]
+wait_time = 2.5
+one_shot = true
