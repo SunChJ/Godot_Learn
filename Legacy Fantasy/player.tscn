@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b1ykf1oiothxt"]
+[gd_scene load_steps=27 format=3 uid="uid://b1ykf1oiothxt"]
 
 [ext_resource type="Texture2D" uid="uid://bytapbcw612qh" path="res://assets/generic_char/char_blue_1.png" id="1_7l1pt"]
 [ext_resource type="Script" path="res://player.gd" id="1_gkxmr"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://classes/StateMachine.gd" id="3_lkv0c"]
 [ext_resource type="Script" path="res://classes/Hitbox.gd" id="4_hmo0k"]
 [ext_resource type="Script" path="res://classes/Stats.gd" id="7_euao5"]
+[ext_resource type="PackedScene" uid="uid://bquk7qeir678i" path="res://ui/status_panel.tscn" id="8_1ngpn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4nglm"]
 size = Vector2(15, 28)
@@ -1911,5 +1912,14 @@ script = ExtResource("3_lkv0c")
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("7_euao5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="StatusPanel" parent="CanvasLayer" node_paths=PackedStringArray("stats") instance=ExtResource("8_1ngpn")]
+offset_left = 12.0
+offset_top = 11.0
+offset_right = 100.0
+offset_bottom = 37.0
+stats = NodePath("../../Stats")
 
 [connection signal="hurt" from="Graphics/Hurtbox" to="." method="_on_hurtbox_hurt"]
