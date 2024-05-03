@@ -71,4 +71,6 @@ func transition_state(from: State, to: State) -> void:
 
 
 func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
-	print("Ouch!")
+	stats.health -= 1
+	if stats.health == 0:
+		queue_free()
