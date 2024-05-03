@@ -16,7 +16,7 @@ const RUN_SPEED := 160.0
 const FLOOR_ACCELERATION := RUN_SPEED / 0.2 # 0~RunSpeed needs 0.2s
 const AIR_ACCELERATION := RUN_SPEED / 0.1 # 0~RunSpeed needs 0.2s
 const JUMP_VELOCITY := -320.0 # In 2D - Y direction, jump up means -XXX
-const WALL_JUMP_VELOCITY := Vector2(500,-320)
+const WALL_JUMP_VELOCITY := Vector2(380,-280)
 
 var default_gravity := ProjectSettings.get("physics/2d/default_gravity") as float
 var is_first_tick := false
@@ -85,6 +85,9 @@ func stand(gravity: float, delta: float) -> void:
 	velocity.y += gravity * delta
 	
 	move_and_slide()
+	
+func can_wall_slide() -> bool:
+	return is_on_wall() and hand_checker.is_colliding() and foot_checker.is_colliding()
 			
 func get_next_state(state: State) -> State:
 	var can_jump := is_on_floor() or coyote_timer.time_left > 0
@@ -117,7 +120,7 @@ func get_next_state(state: State) -> State:
 		State.FALL:
 			if is_on_floor():
 				return State.LANDING if is_still else State.RUNNING
-			if is_on_wall() and hand_checker.is_colliding() and foot_checker.is_colliding():
+			if can_wall_slide():
 				return State.WALL_SLIDING
 		
 		State.LANDING:
@@ -135,11 +138,18 @@ func get_next_state(state: State) -> State:
 				return State.FALL
 				
 		State.WALL_JUMP:
+			if can_wall_slide() and not is_first_tick:
+				return State.WALL_SLIDING
 			if velocity.y >= 0:
 				return State.FALL
 	return state
 	
 func transition_state(from: State, to: State) -> void:
+	print("[%s] %s => %s" %[
+		Engine.get_physics_frames(),
+		State.keys()[from] if from != -1 else "<START>",
+		State.keys()[to],
+	])
 	if from not in GROUND_STATE and to in GROUND_STATE:
 		coyote_timer.stop()
 		
@@ -173,10 +183,6 @@ func transition_state(from: State, to: State) -> void:
 			velocity = WALL_JUMP_VELOCITY
 			velocity.x *= get_wall_normal().x
 			jump_request_timer.stop()
-				
-	if to == State.WALL_JUMP:
-		Engine.time_scale = 0.3
-	if from == State.WALL_JUMP:
-		Engine.time_scale = 1.0
+			
 		
 	is_first_tick = true
