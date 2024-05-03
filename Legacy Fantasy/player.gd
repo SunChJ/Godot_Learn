@@ -14,9 +14,9 @@ const GROUND_STATE := [State.IDLE, State.RUNNING, State.LANDING]
 
 const RUN_SPEED := 160.0
 const FLOOR_ACCELERATION := RUN_SPEED / 0.2 # 0~RunSpeed needs 0.2s
-const AIR_ACCELERATION := RUN_SPEED / 0.02 # 0~RunSpeed needs 0.2s
+const AIR_ACCELERATION := RUN_SPEED / 0.1 # 0~RunSpeed needs 0.2s
 const JUMP_VELOCITY := -320.0 # In 2D - Y direction, jump up means -XXX
-const WALL_JUMP_VELOCITY := Vector2(1000,-320)
+const WALL_JUMP_VELOCITY := Vector2(500,-320)
 
 var default_gravity := ProjectSettings.get("physics/2d/default_gravity") as float
 var is_first_tick := false
