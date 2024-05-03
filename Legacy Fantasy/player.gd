@@ -27,6 +27,7 @@ var is_first_tick := false
 @onready var jump_request_timer: Timer = $JumpRequestTimer
 @onready var hand_checker: RayCast2D = $Graphics/HandChecker
 @onready var foot_checker: RayCast2D = $Graphics/FootChecker
+@onready var state_machine: StateMachine = $StateMachine
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
@@ -52,14 +53,18 @@ func tick_physics(state: State, delta: float) -> void:
 			move(default_gravity, delta)
 			
 		State.LANDING:
-			stand(delta)
+			stand(default_gravity, delta)
 			
 		State.WALL_SLIDING:
 			move(default_gravity / 3, delta)
 			graphics.scale.x = get_wall_normal().x
 			
 		State.WALL_JUMP:
-			move(0.0 if is_first_tick else default_gravity, delta)
+			if state_machine.state_time < 0.1:
+				stand(0.0 if is_first_tick else default_gravity, delta)
+				graphics.scale.x = get_wall_normal().x
+			else:	
+				move(default_gravity, delta)
 			
 	is_first_tick = false
 	
@@ -74,10 +79,10 @@ func move(gravity: float, delta: float)	-> void:
 	
 	move_and_slide()
 	
-func stand(delta: float) -> void:
+func stand(gravity: float, delta: float) -> void:
 	var acceleration := FLOOR_ACCELERATION if is_on_floor() else AIR_ACCELERATION
 	velocity.x = move_toward(velocity.x, 0.0, acceleration * delta)
-	velocity.y += default_gravity * delta
+	velocity.y += gravity * delta
 	
 	move_and_slide()
 			
