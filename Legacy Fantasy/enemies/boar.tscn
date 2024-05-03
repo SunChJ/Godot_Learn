@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dgo5mactdrvhb" path="res://assets/legacy_fantasy/Boar/Run-Sheet.png" id="5_7ai6v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wsg8r"]
+radius = 11.0
 
 [sub_resource type="Animation" id="Animation_n5okx"]
 resource_name = "idle"
@@ -226,6 +227,18 @@ _data = {
 position = Vector2(0, -16)
 texture = ExtResource("2_8liio")
 hframes = 4
+
+[node name="WallChecker" type="RayCast2D" parent="Graphics" index="1"]
+position = Vector2(-9, -12)
+target_position = Vector2(-15, 0)
+
+[node name="PlayerChecker" type="RayCast2D" parent="Graphics" index="2"]
+position = Vector2(-9, -12)
+target_position = Vector2(-87, 0)
+
+[node name="FloorChecker" type="RayCast2D" parent="Graphics" index="3"]
+position = Vector2(-15, -1)
+target_position = Vector2(0, 6)
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(-1, -11)
