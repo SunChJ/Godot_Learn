@@ -13,6 +13,9 @@ enum State {
 	ATTACK_3,
 	HURT,
 	DYING,
+	SLIDING_START,
+	SLIDING_LOOP,
+	SLIDING_END,
 }
 
 const GROUND_STATE := [
@@ -26,6 +29,8 @@ const AIR_ACCELERATION := RUN_SPEED / 0.1 # 0~RunSpeed needs 0.2s
 const JUMP_VELOCITY := -320.0 # In 2D - Y direction, jump up means -XXX
 const WALL_JUMP_VELOCITY := Vector2(380,-280)
 const KNOCKBACK_AMOUNT := 512.0
+const SLIDING_DURATION := 0.3
+const SLIDING_SPEED := 256.0
 
 @export var can_combo := false
 
@@ -95,6 +100,12 @@ func tick_physics(state: State, delta: float) -> void:
 		State.HURT,State.DYING:
 			stand(default_gravity, delta)
 			
+		State.SLIDING_END:
+			stand(default_gravity, delta)
+		
+		State.SLIDING_START, State.SLIDING_LOOP:
+			slide(delta)
+			
 	is_first_tick = false
 	
 func move(gravity: float, delta: float)	-> void:
@@ -114,11 +125,23 @@ func stand(gravity: float, delta: float) -> void:
 	velocity.y += gravity * delta
 	
 	move_and_slide()
+	
+func slide(delta: float) -> void:
+	velocity.x = graphics.scale.x * SLIDING_SPEED
+	velocity.y +=default_gravity * delta
+	
+	move_and_slide()
+	
 func die() -> void:
 	get_tree().reload_current_scene()	
 	
 func can_wall_slide() -> bool:
 	return is_on_wall() and hand_checker.is_colliding() and foot_checker.is_colliding()
+			
+func should_slide() -> bool:
+	if not Input.is_action_just_pressed("slide"):
+		return false
+	return not foot_checker.is_colliding()
 			
 func get_next_state(state: State) -> int:
 	if stats.health == 0:
@@ -144,6 +167,8 @@ func get_next_state(state: State) -> int:
 		State.IDLE:
 			if Input.is_action_just_pressed("attack"):
 				return State.ATTACK_1
+			if should_slide():
+				return State.SLIDING_START
 			
 			if not is_still:
 				return State.RUNNING
@@ -151,6 +176,8 @@ func get_next_state(state: State) -> int:
 		State.RUNNING:
 			if Input.is_action_just_pressed("attack"):
 				return State.ATTACK_1
+			if should_slide():
+				return State.SLIDING_START
 			if is_still:
 				return State.IDLE
 			
@@ -199,6 +226,18 @@ func get_next_state(state: State) -> int:
 		State.HURT:
 			if not animation_player.is_playing():
 				return State.IDLE
+				
+		State.SLIDING_START:
+			if not animation_player.is_playing():
+				return State.SLIDING_LOOP
+				
+		State.SLIDING_END:
+			if not animation_player.is_playing():
+				return State.IDLE
+		
+		State.SLIDING_LOOP:
+			if state_machine.state_time > SLIDING_DURATION or is_on_wall():
+				return State.SLIDING_END
 		
 		
 	return StateMachine.KEEP_CURRENT
@@ -269,6 +308,15 @@ func transition_state(from: State, to: State) -> void:
 		State.DYING:
 			animation_player.play("die")
 			invincible_timer.stop()
+		
+		State.SLIDING_START:
+			animation_player.play("sliding_start")
+		
+		State.SLIDING_LOOP:
+			animation_player.play("sliding_loop")
+		
+		State.SLIDING_END:
+			animation_player.play("sliding_end")
 		
 	is_first_tick = true
 
