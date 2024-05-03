@@ -1,0 +1,21 @@
+class_name Enemy
+extends CharacterBody2D
+
+enum Direction {
+	LEFT = -1,
+	RIGHT = +1,
+}
+
+@export var direction := Direction.LEFT:
+	set(v):
+		direction = v
+		graphics.scale.x = -direction
+
+@export var max_speed: float = 180
+@export var acceleration: float = 2000
+
+var default_gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+@onready var graphics: Node2D = $Graphics
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var state_machine: StateMachine = $StateMachine
