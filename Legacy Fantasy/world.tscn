@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0l1eqtl8xgem"]
+[gd_scene load_steps=11 format=3 uid="uid://d0l1eqtl8xgem"]
 
 [ext_resource type="Texture2D" uid="uid://dd8w62nnwolpl" path="res://assets/legacy_fantasy/Trees/Tree-Assets.png" id="1_fjhfa"]
 [ext_resource type="Script" path="res://world.gd" id="1_pp5aa"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bjjxx1ie5nyt2" path="res://assets/legacy_fantasy/Background/Background.png" id="4_p8fgu"]
 [ext_resource type="Texture2D" uid="uid://c1rdcrhcdn2q5" path="res://assets/legacy_fantasy/Trees/Background.png" id="5_kvlgl"]
 [ext_resource type="PackedScene" uid="uid://cmhqmaeqnoeyk" path="res://enemies/boar.tscn" id="6_n776x"]
+[ext_resource type="Script" path="res://classes/Interactable.gd" id="7_yu54j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_65hkn"]
 texture = ExtResource("1_fjhfa")
@@ -479,6 +480,8 @@ terrain_set_0/terrain_1/name = "Leaves"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_65hkn")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymt2x"]
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_pp5aa")
 metadata/_edit_horizontal_guides_ = [208.0]
@@ -771,3 +774,17 @@ region_rect = Rect2(210, 197, 124, 86)
 
 [node name="Boar" parent="." instance=ExtResource("6_n776x")]
 position = Vector2(554, 172)
+
+[node name="Mushrrom" type="Area2D" parent="."]
+position = Vector2(407, 211)
+script = ExtResource("7_yu54j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mushrrom"]
+shape = SubResource("RectangleShape2D_ymt2x")
+
+[node name="Vegatable" type="Area2D" parent="."]
+position = Vector2(296, 186)
+script = ExtResource("7_yu54j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vegatable"]
+shape = SubResource("RectangleShape2D_ymt2x")

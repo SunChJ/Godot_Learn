@@ -2418,6 +2418,5 @@ stats = NodePath("../../Stats")
 position = Vector2(0, -51)
 sprite_frames = SubResource("SpriteFrames_fe6kl")
 autoplay = "default"
-frame_progress = 0.634699
 
 [connection signal="hurt" from="Graphics/Hurtbox" to="." method="_on_hurtbox_hurt"]
