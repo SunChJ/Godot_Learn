@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 enum State {
@@ -42,6 +43,7 @@ var is_first_tick := false
 var is_combo_requested := false
 var pending_damage: Damage
 var fall_from_y: float
+var interacting_with: Interactable
 
 @onready var graphics: Node2D = $Graphics
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
