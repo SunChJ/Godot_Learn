@@ -153,6 +153,8 @@ func die() -> void:
 	get_tree().reload_current_scene()	
 	
 func register_interactable(v: Interactable) -> void:
+	if state_machine.current_state == State.DYING:
+		return
 	if v in interacting_with:
 		return
 	interacting_with.append(v)
@@ -335,6 +337,7 @@ func transition_state(from: State, to: State) -> void:
 		State.DYING:
 			animation_player.play("die")
 			invincible_timer.stop()
+			interacting_with.clear()
 		
 		State.SLIDING_START:
 			animation_player.play("sliding_start")
